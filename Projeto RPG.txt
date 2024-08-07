@@ -1,0 +1,624 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <vector>
+
+using namespace std;
+
+///Constantes para definir as cores de texto
+const char* T_ROSA = "\033[38;5;205m";
+const char* T_VERMELHO = "\033[31m";
+const char* T_CIANO = "\033[36m";
+const char* RESET_COR = "\033[0m"; ///Resetar a cor para o padrão
+const char* T_MARROM = "\033[33;2m";
+const char* T_LARANJA = "\033[38;5;202m";
+const char* T_VERDE = "\033[32m";
+const char* T_VERDE_C = "\033[92m";
+const char* T_VERMELHO_C = "\033[91m";
+const char* T_AZUL_C = "\033[94m";
+const char* T_AMARELO = "\033[33m";
+const char* T_AZUL_E = "\033[34m";
+const char* T_ROXO = "\033[35m";
+const char* T_CIANO_C = "\033[96m";
+const char* T_CINZA = "\033[90m"; // Grey text
+
+
+// Chances de raridades dos baús.
+string determineRarity(int randValue, int Bau, int& VComum, int& VIncomum, int& VRaro, int& VEpico, int& VLendario, int& VMitico) {
+    //Baú de madeira quebrado
+    if (Bau == 1) {
+        if (randValue <= 40) {
+            return "Comum";
+        } else if (randValue <= 70) {
+            return "Incomum";
+        } else if (randValue <= 95) {
+            return "Raro";
+        } else if (randValue <= 99) {
+            return "Épico";
+        } else {
+            return "Lendário";
+        }
+    }
+          //Baú de madeira
+          if (Bau == 2) {
+        if (randValue <= 32) {
+            return "Comum";
+        } else if (randValue <= 62) {
+            return "Incomum";
+        } else if (randValue <= 90) {
+            return "Raro";
+        } else if (randValue <= 97) {
+            return "Épico";
+        } else {
+            return "Lendário";
+        }
+    }
+         //Baú de Ferro
+         if (Bau == 3) {
+        if (randValue <= 30) {
+            return "Comum";
+        } else if (randValue <= 66) {
+            return "Incomum";
+        } else if (randValue <= 88) {
+            return "Raro";
+        } else if (randValue <= 96) {
+            return "Épico";
+        } else {
+            return "Lendário";
+        }
+    }
+
+          //Baú de Ouro
+         if (Bau == 4) {
+        if (randValue <= 25) {
+            return "Comum";
+        } else if (randValue <= 60) {
+            return "Incomum";
+        } else if (randValue <= 80) {
+            return "Raro";
+        } else if (randValue <= 94) {
+            return "Épico";
+        } else {
+            return "Lendário";
+        }
+    }
+
+     //Baú de Enorme
+         if (Bau == 5) {
+        if (randValue <= 32) {
+            return "Comum";
+        } else if (randValue <= 62) {
+            return "Incomum";
+        } else if (randValue <= 90) {
+            return "Raro";
+        } else if (randValue <= 98) {
+            return "Épico";
+        } else {
+            return "Lendário";
+        }
+    }
+           //Baú de Balanceado
+         if (Bau == 6) {
+        if (randValue <= 20) {
+            return "Comum";
+        } else if (randValue <= 40) {
+            return "Incomum";
+        } else if (randValue <= 60) {
+            return "Raro";
+        } else if (randValue <= 80) {
+            return "Épico";
+        } else {
+            return "Lendário";
+        }
+    }
+           //Baú de Esmeralda
+         if (Bau == 7) {
+        if (randValue <= 20) {
+            return "Comum";
+        } else if (randValue <= 60) {
+            return "Incomum";
+        } else if (randValue <= 80) {
+            return "Raro";
+        } else if (randValue <= 90) {
+            return "Épico";
+        } else {
+            return "Lendário";
+        }
+    }
+
+          //Baú Estranho
+         if (Bau == 8) {
+        if (randValue <= 30) {
+            return "Comum";
+        } else if (randValue <= 45) {
+            return "Incomum";
+        } else if (randValue <= 55) {
+            return "Raro";
+        } else if (randValue <= 70) {
+            return "Épico";
+        } else {
+            return "Lendário";
+        }
+    }
+
+    //Baú Excepcional
+         if (Bau == 9) {
+        if (randValue <= 1) {
+            return "Comum";
+        } else if (randValue <= 5) {
+            return "Incomum";
+        } else if (randValue <= 30) {
+            return "Raro";
+        } else if (randValue <= 60) {
+            return "Épico";
+        } else if (randValue <= 99) {
+            return "Lendário";
+        }else{
+            return "Mítico";
+        }
+    }
+
+    //Baú Apex
+         if (Bau == 10) {
+        if (randValue <= 40) {
+            return "Comum";
+        } else if (randValue <= 68) {
+            return "Raro";
+        } else if (randValue <= 93) {
+            return "Épico";
+        } else {
+            return "Lendário";
+        }
+    }
+
+    //Baú de Safira
+         if (Bau == 11) {
+        if (randValue <= 10) {
+            return "Comum";
+        } else if (randValue <= 30) {
+            return "Incomum";
+        } else if (randValue <= 70) {
+            return "Raro";
+        } else if (randValue <= 90) {
+            return "Épico";
+        } else {
+            return "Lendário";
+        }
+    }
+
+    //Baú de Ametista
+         if (Bau == 12) {
+        if (randValue <= 10) {
+            return "Comum";
+        } else if (randValue <= 20) {
+            return "Incomum";
+        } else if (randValue <= 40) {
+            return "Raro";
+        } else if (randValue <= 80) {
+            return "Épico";
+        } else {
+            return "Lendário";
+        }
+    }
+
+    //Baú de Topázio
+         if (Bau == 13) {
+        if (randValue <= 20) {
+            return "Comum";
+        } else if (randValue <= 30) {
+            return "Incomum";
+        } else if (randValue <= 40) {
+            return "Raro";
+        } else if (randValue <= 60) {
+            return "Épico";
+        } else {
+            return "Lendário";
+        }
+    }
+
+    //Baú de Chefe
+         if (Bau == 14) {
+        if (randValue <= 40) {
+            return "Raro";
+        } else if (randValue <= 70) {
+            return "Épico";
+        } else if (randValue <= 95) {
+            return "Lendário";
+        } else {
+            return "Mítico";
+        }
+    }
+
+     //Baú da Injustiça
+    if (Bau == 15) {
+        if (randValue <= 1) {
+            return "Lendário";
+        } else if (randValue <= 5) {
+            return "Épico";
+        } else if (randValue <= 30) {
+            return "Raro";
+        } else if (randValue <= 60) {
+            return "Incomum";
+        } else {
+            return "Comum";
+        }
+    }
+
+     //Baú Customizado
+    if (Bau == 16) {
+        if (randValue <= VComum) {
+            return "Comum";
+        } else if (randValue <= VComum + VIncomum) {
+            return "Incomum";
+        } else if (randValue <= VComum + VIncomum + VRaro) {
+            return "Raro";
+        } else if (randValue <= VComum + VIncomum + VRaro + VEpico) {
+            return "Épico";
+         } else if (randValue <= VComum + VIncomum + VRaro + VEpico + VLendario) {
+            return "Lendário";
+        } else {
+            return "Mítico";
+        }
+    }
+
+
+}
+char resty;
+    int tyres;
+
+string determineItemType() {
+    vector<string> itemTypes;
+
+    if (tyres == 1){
+        itemTypes = {"Arma"};
+    }
+    else if (tyres == 2){
+        itemTypes = {"Armadura"};
+    }
+     else if (tyres == 3){
+        itemTypes = {"Poção"};
+    }
+     else if (tyres == 4){
+        itemTypes = {"Pergaminho"};
+    }
+     else if (tyres == 5){
+        itemTypes = {"Acessório"};
+    }
+     else if (tyres == 6){
+        itemTypes = {"Miscelânia"};
+    }
+     else {
+     // Seleciona o tipo de item aleatoriamente
+    itemTypes = {"Arma", "Armadura", "Poção", "Pergaminho", "Acessório", "Miscelânia"};
+     }
+     // Executa a Seleção de tipo de item aleatorio
+    int index = rand() % itemTypes.size();
+    return itemTypes[index];
+}
+
+int main() {
+    setlocale(LC_ALL, "portuguese");
+
+    unsigned seed = time(0);
+
+    srand(seed);
+
+    int sorte;
+    int area;
+
+    cout << "Insira a Sorte. (-100 a 100)" << endl;
+    cin >> sorte;
+    cout << "Sorte: " << sorte << endl;
+    cout << "Insira a Área. (Ainda não faz diferença)" << endl;
+    cin >> area;
+    cout << "Filtrar tipos de itens? (s/n)" << endl;
+    cin >> resty;
+
+    if ((resty == 's') || (resty == 'S')){
+    cout << "Qual item deve ser filtrado?" << endl;
+    cout << "1. Arma." << endl;
+    cout << "2. Armadura." << endl;
+    cout << "3. Poção." << endl;
+    cout << "4. Pergaminho." << endl;
+    cout << "5. Acessório." << endl;
+    cout << "6. Miscelânia." << endl;
+
+    cin >> tyres;
+    }
+
+    cout << "Escolha o Baú:" << endl;
+    cout << "1. Baú de Madeira Quebrado" << endl;
+    cout << "2. Baú de Madeira" << endl;
+    cout << "3. Baú de Ferro" << endl;
+    cout << "4. Baú de Ouro" << endl;
+    cout << "5. Baú de Madeira Grande" << endl;
+    cout << "6. Baú Balanceado" << endl;
+    cout << "7. Baú de Esmeralda" << endl;
+    cout << "8. Baú Estranho" << endl;
+    cout << "9. Baú Excepcional" << endl;
+    cout << "10. Baú Apex" << endl;
+    cout << "11. Baú de Safira" << endl;
+    cout << "12. Baú de Ametista" << endl;
+    cout << "13. Baú de Topázio" << endl;
+    cout << "14. Baú de Chefe" << endl;
+    cout << "15. Baú da Injustiça" << endl;
+    cout << "16. Baú Customizado" << endl;
+
+    int Bau;
+    cin >> Bau;
+
+    int MinCustom, MaxCustom;
+    int VComum = 0, VIncomum = 0, VRaro = 0, VEpico = 0, VLendario = 0, VMitico = 0;
+    int ValorRestante = 100;
+    char Escolha;
+
+if (Bau == 16){
+    cout << "Insira a quantidade de itens:" << endl;
+    cout << "Mínimo: ";
+    cin >> MinCustom;
+    cout << "Máximo: ";
+    cin >> MaxCustom;
+    MaxCustom + 1;
+
+      if (MinCustom > 0){
+      MaxCustom - MinCustom;
+      }
+
+
+
+  while (Escolha != 'n' && Escolha != 'N'){
+   ValorRestante = 100;
+
+   cout << "Insira a chance de itens " << T_CINZA << "Comums" << RESET_COR << " em %: ";
+   cin >> VComum;
+   ValorRestante -= VComum;
+   cout << "Valores Restantes (Insira valores menores que esse): " << T_VERMELHO << ValorRestante << RESET_COR << endl;
+
+ if (ValorRestante > 0){
+   cout << "Insira a chance de itens " << T_VERDE_C << "Incomums" << RESET_COR << " em %: ";
+   cin >> VIncomum;
+   ValorRestante -= VIncomum;
+   cout << "Valores Restantes (Insira valores menores que esse): " << T_VERMELHO << ValorRestante << RESET_COR << endl;
+ }
+  if (ValorRestante > 0){
+   cout << "Insira a chance de itens " << T_AZUL_C << "Raros" << RESET_COR << " em %: ";
+   cin >> VRaro;
+   ValorRestante -= VRaro;
+   cout << "Valores Restantes (Insira valores menores que esse): " << T_VERMELHO << ValorRestante << RESET_COR << endl;
+ }
+  if (ValorRestante > 0){
+   cout << "Insira a chance de itens " << T_ROXO << "Épicos" << RESET_COR << " em %: ";
+   cin >> VEpico;
+   ValorRestante -= VEpico;
+   cout << "Valores Restantes (Insira valores menores que esse): " << T_VERMELHO << ValorRestante << RESET_COR << endl;
+ }
+  if (ValorRestante > 0){
+   cout << "Insira a chance de itens " << T_AMARELO << "Lendários" << RESET_COR << " em % (Provavelmente " << ValorRestante << "): ";
+   cin >> VLendario;
+   ValorRestante -= VLendario;
+   cout << "Valores Restantes (Insira valores menores que esse): " << T_VERMELHO << ValorRestante << RESET_COR << endl;
+ }
+  if (ValorRestante > 0){
+   cout << "Insira a chance de itens " << T_ROSA << "Míticos" << RESET_COR << " em % (Provavelmente " << ValorRestante << "): ";
+   cin >> VMitico;
+   ValorRestante -= VMitico;
+   cout << "Valores Restantes (É pra ser 0): " << T_VERMELHO << ValorRestante << RESET_COR << endl;
+  }
+   cout << endl;
+   cout << "Essas são as chances de raridade do Baú: " << endl;
+
+   cout << T_CINZA << "Comum: ";
+  if (VComum > 1){
+   cout << T_VERMELHO_C << "1-" << VComum << RESET_COR << endl;
+}else if (VComum == 1 || VComum == 0){
+   cout << T_VERMELHO_C << VComum << "-" << VComum << RESET_COR << endl;
+}
+
+if (VIncomum > 0){
+   cout << T_VERDE_C << "Incomum: ";
+   if (VIncomum >= 1){
+   cout << T_VERMELHO_C << VComum + 1 << "-" << VComum + VIncomum << RESET_COR << endl;
+   } else if (VIncomum == 0){
+   cout << T_VERMELHO_C << VIncomum << RESET_COR << endl;
+   }
+}
+
+if (VRaro > 0){
+   cout << T_AZUL_C << "Raro: ";
+   if (VRaro >= 1){
+   cout << T_VERMELHO_C << VComum + VIncomum + 1 << "-" << VComum + VIncomum + VRaro << RESET_COR << endl;
+   } else if (VRaro == 0){
+   cout << T_VERMELHO_C << VRaro << RESET_COR << endl;
+   }
+}
+
+if (VEpico > 0){
+   cout << T_ROXO << "Épico: ";
+   if (VEpico >= 1){
+   cout << T_VERMELHO_C << VComum + VIncomum + VRaro + 1 << "-" << VComum + VIncomum + VRaro + VEpico << RESET_COR << endl;
+   } else if (VEpico == 0){
+   cout << T_VERMELHO_C << VEpico << RESET_COR << endl;
+   }
+}
+
+if (VLendario > 0){
+   cout << T_AMARELO << "Lendário: ";
+   if (VLendario >= 1){
+   cout << T_VERMELHO_C << VComum + VIncomum + VRaro + VEpico + 1 << "-" << VComum + VIncomum + VRaro + VEpico + VLendario << RESET_COR << endl;
+   } else if (VLendario == 0){
+   cout << T_VERMELHO_C << VLendario << RESET_COR << endl;
+   }
+}
+
+if (VMitico > 0){
+   cout << T_ROSA << "Mítico: " << RESET_COR;
+   if (VMitico >= 1){
+   cout << T_VERMELHO_C << VComum + VIncomum + VRaro + VEpico + VLendario + 1 << "-" << VComum + VIncomum + VRaro + VEpico + VLendario + VMitico << RESET_COR << endl;
+   } else if (VMitico == 0){
+   cout << T_VERMELHO_C << VMitico << RESET_COR << endl;
+   }
+}
+
+   cout << endl;
+   cout << "Deseja Refazer? (S)(N): ";
+   cout << endl;
+   cin >> Escolha;
+   system("cls");
+  }
+
+
+}
+
+    // Lista dos baús e suas chances de itens.
+
+    int numItems; // Initialize numItems outside of if-else blocks.
+
+    if (Bau == 1){
+    numItems = rand() % 4; // Seleciona itens de 0 a 3.
+    }
+    else if (Bau == 2){
+    numItems = rand() % 5; // Seleciona itens de 0 a 4.
+    }
+    else if (Bau == 3){
+    numItems = rand() % 6; // Seleciona itens de 0 a 5.
+    }
+    else if (Bau == 4){
+    numItems = rand() % 6 + 1; // Seleciona itens de 1 a 6.
+    }
+    else if (Bau == 5){
+    numItems = rand() % 10 + 1; // Seleciona itens de 1 a 10.
+    }
+    else if (Bau == 6){
+    numItems = rand() % 5 + 1; // Seleciona itens de 1 a 5.
+    }
+    else if (Bau == 7){
+    numItems = rand() % 2 + 1; // Seleciona itens de 1 a 2.
+    }
+    else if (Bau == 8){
+    numItems = rand() % 5; // Seleciona itens de 0 a 4.
+    }
+    else if (Bau == 9){
+    numItems = rand() % 6 + 4; // Seleciona itens de 4 a 9.
+    }
+    else if (Bau == 10){
+    numItems = 3; // Seleciona 3 itens.
+    }
+    else if (Bau == 11){
+    numItems = rand() % 3 + 1; // Seleciona itens de 1 a 3.
+    }
+    else if (Bau == 12){
+    numItems = rand() % 4 + 1; // Seleciona itens de 1 a 4.
+    }
+    else if (Bau == 13){
+    numItems = rand() % 5 + 1; // Seleciona itens de 1 a 5.
+    }
+    else if (Bau == 14){
+    numItems = 3; // Seleciona 3 itens.
+    }
+    else if (Bau == 15){
+    numItems = rand() % 4; // Seleciona 3 itens.
+    }
+     else if (Bau == 16){
+     if (MaxCustom == MinCustom){
+        numItems = MinCustom; // Se for um valor fixo
+      }else{
+       numItems = (rand() % MaxCustom) + MinCustom; // Seleciona numero de itens definido pelo usuário.
+      }
+
+    }
+    else {
+        cout << "Valor Inválido." << endl;
+        return 1;
+    }
+
+
+
+    //Manipulação na quantidade de itens pela sorte.
+
+    if (sorte >= 100){
+    numItems = numItems + 4;
+    }
+    else if (sorte >= 75){
+    numItems = numItems + 3;
+    }
+    else if (sorte >= 50){
+    numItems = numItems + 2;
+    }
+    else if (sorte >= 25){
+    numItems = numItems + 1;
+    }
+
+
+    //Caso a sorte seja negativa
+    if (sorte <= -100){
+    numItems = numItems - 4;
+    }
+    else if (sorte <= -75){
+    numItems = numItems - 3;
+    }
+    else if (sorte <= -50){
+    numItems = numItems - 2;
+    }
+    else if (sorte <= -25){
+    numItems = numItems - 1;
+    }
+
+//Caso o bau seja o da injustiça
+    if (Bau == 15){
+
+      if (sorte >= 100){
+      numItems = numItems - 8;
+      }
+       else if (sorte >= 75){
+       numItems = numItems - 6;
+       }
+        else if (sorte >= 50){
+        numItems = numItems - 4;
+        }
+         else if (sorte >= 25){
+         numItems = numItems - 2;
+         }
+
+    if (sorte <= -100){
+    numItems = numItems + 8;
+    }
+     else if (sorte <= -75){
+     numItems = numItems + 6;
+     }
+      else if (sorte <= -50){
+      numItems = numItems + 4;
+      }
+       else if (sorte <= -25){
+       numItems = numItems + 2;
+       }
+
+    }
+
+
+    cout << "Loot do Baú (" << numItems << " itens):" << endl;
+
+    for (int i = 0; i < numItems; ++i) {
+        int randValue = rand() % 100 + 1 + sorte; // Adicona sorte no valor aleatorio
+        int ogrand = randValue - sorte; // mostra o valor original
+
+        string rarity = determineRarity(randValue, Bau, VComum, VIncomum, VRaro, VEpico, VLendario, VMitico);
+        string itemType = determineItemType();
+
+        cout << "Item " << (i + 1) << ": Raridade - ";
+        if (rarity == "Incomum"){ cout << T_VERDE_C << rarity << RESET_COR;}
+        else if (rarity == "Raro"){ cout << T_AZUL_C << rarity << RESET_COR;}
+        else if (rarity == "Épico"){ cout << T_ROXO << rarity << RESET_COR;}
+        else if (rarity == "Lendário"){ cout << T_AMARELO << rarity << RESET_COR;}
+        else if (rarity == "Mítico"){ cout << T_ROSA << rarity << RESET_COR;}
+        else {cout << T_CINZA << rarity << RESET_COR;}
+        cout << ", Tipo - " << itemType << endl;
+
+
+        cout << "Valor Original (Sem sorte)" << ": " << ogrand << endl;
+        cout << "Valor Modificado (Com sorte): " << randValue << endl;
+        cout << endl;
+    }
+
+
+    return 0;
+}
