@@ -2,10 +2,10 @@
 Um programa que gera itens de RPG aleatoriamente.
 
 # Objetivo e Finalidade do Programa:
-Gerar itens de rpg baseados em listas de parâmetros e características que serão aplicados a esses itens.
+- Gerar itens de rpg baseados em listas de parâmetros e características que serão aplicados a esses itens.
 
 # Oque foi feito:
-O programa define a quantidade, o tipo e raridade do item.
+- O programa define a quantidade, o tipo e raridade do item.
 
 # Oque ainda está em progresso:
 - Definir o item específico que foi produzido.
