@@ -24,7 +24,7 @@ const char* T_CINZA = "\033[90m"; // Grey text
 
 
 // Chances de raridades dos baús.
-string determineRarity(int randValue, int Bau, int& VComum, int& VIncomum, int& VRaro, int& VEpico, int& VLendario, int& VMitico) {
+string determinaRaridade(int randValue, int Bau, int& VComum, int& VIncomum, int& VRaro, int& VEpico, int& VLendario, int& VMitico) {
     //Baú de madeira quebrado
     if (Bau == 1) {
         if (randValue <= 40) {
@@ -263,28 +263,27 @@ string determineRarity(int randValue, int Bau, int& VComum, int& VIncomum, int& 
 
 
 }
-char resty;
-    int tyres;
 
-string determineItemType() {
+// Definição do tipo do item
+string determinaItemTipo(int TipoFiltro) {
     vector<string> itemTypes;
 
-    if (tyres == 1){
+    if (TipoFiltro == 1){
         itemTypes = {"Arma"};
     }
-    else if (tyres == 2){
+    else if (TipoFiltro == 2){
         itemTypes = {"Armadura"};
     }
-     else if (tyres == 3){
+     else if (TipoFiltro == 3){
         itemTypes = {"Poção"};
     }
-     else if (tyres == 4){
+     else if (TipoFiltro == 4){
         itemTypes = {"Pergaminho"};
     }
-     else if (tyres == 5){
+     else if (TipoFiltro == 5){
         itemTypes = {"Acessório"};
     }
-     else if (tyres == 6){
+     else if (TipoFiltro == 6){
         itemTypes = {"Miscelânia"};
     }
      else {
@@ -296,63 +295,9 @@ string determineItemType() {
     return itemTypes[index];
 }
 
-int main() {
-    setlocale(LC_ALL, "portuguese");
+// Define as características do bau customizado
+void DefBauCustom(int& MinCustom, int& MaxCustom, int& ValorRestante, char& Escolha, int& VComum, int& VIncomum, int& VRaro, int& VEpico, int& VLendario, int& VMitico) {
 
-    unsigned seed = time(0);
-
-    srand(seed);
-
-    int sorte;
-    int area;
-
-    cout << "Insira a Sorte. (-100 a 100)" << endl;
-    cin >> sorte;
-    cout << "Sorte: " << sorte << endl;
-    cout << "Insira a Área. (Ainda não faz diferença)" << endl;
-    cin >> area;
-    cout << "Filtrar tipos de itens? (s/n)" << endl;
-    cin >> resty;
-
-    if ((resty == 's') || (resty == 'S')){
-    cout << "Qual item deve ser filtrado?" << endl;
-    cout << "1. Arma." << endl;
-    cout << "2. Armadura." << endl;
-    cout << "3. Poção." << endl;
-    cout << "4. Pergaminho." << endl;
-    cout << "5. Acessório." << endl;
-    cout << "6. Miscelânia." << endl;
-
-    cin >> tyres;
-    }
-
-    cout << "Escolha o Baú:" << endl;
-    cout << "1. Baú de Madeira Quebrado" << endl;
-    cout << "2. Baú de Madeira" << endl;
-    cout << "3. Baú de Ferro" << endl;
-    cout << "4. Baú de Ouro" << endl;
-    cout << "5. Baú de Madeira Grande" << endl;
-    cout << "6. Baú Balanceado" << endl;
-    cout << "7. Baú de Esmeralda" << endl;
-    cout << "8. Baú Estranho" << endl;
-    cout << "9. Baú Excepcional" << endl;
-    cout << "10. Baú Apex" << endl;
-    cout << "11. Baú de Safira" << endl;
-    cout << "12. Baú de Ametista" << endl;
-    cout << "13. Baú de Topázio" << endl;
-    cout << "14. Baú de Chefe" << endl;
-    cout << "15. Baú da Injustiça" << endl;
-    cout << "16. Baú Customizado" << endl;
-
-    int Bau;
-    cin >> Bau;
-
-    int MinCustom, MaxCustom;
-    int VComum = 0, VIncomum = 0, VRaro = 0, VEpico = 0, VLendario = 0, VMitico = 0;
-    int ValorRestante = 100;
-    char Escolha;
-
-if (Bau == 16){
     cout << "Insira a quantidade de itens:" << endl;
     cout << "Mínimo: ";
     cin >> MinCustom;
@@ -364,9 +309,7 @@ if (Bau == 16){
       MaxCustom - MinCustom;
       }
 
-
-
-  while (Escolha != 'n' && Escolha != 'N'){
+while (Escolha != 'n' && Escolha != 'N'){
    ValorRestante = 100;
 
    cout << "Insira a chance de itens " << T_CINZA << "Comums" << RESET_COR << " em %: ";
@@ -469,9 +412,7 @@ if (VMitico > 0){
 
 }
 
-    // Lista dos baús e suas chances de itens.
-
-    int numItems; // Initialize numItems outside of if-else blocks.
+void GeraQtdItens (int& Bau, int& numItems, int& sorte, int& MinCustom, int& MaxCustom){
 
     if (Bau == 1){
     numItems = rand() % 4; // Seleciona itens de 0 a 3.
@@ -516,7 +457,7 @@ if (VMitico > 0){
     numItems = 3; // Seleciona 3 itens.
     }
     else if (Bau == 15){
-    numItems = rand() % 4; // Seleciona 3 itens.
+    numItems = rand() % 4; // Seleciona 0 a 3 itens.
     }
      else if (Bau == 16){
      if (MaxCustom == MinCustom){
@@ -528,12 +469,12 @@ if (VMitico > 0){
     }
     else {
         cout << "Valor Inválido." << endl;
-        return 1;
     }
 
 
-
     //Manipulação na quantidade de itens pela sorte.
+
+  if (Bau != 15){
 
     if (sorte >= 100){
     numItems = numItems + 4;
@@ -548,7 +489,6 @@ if (VMitico > 0){
     numItems = numItems + 1;
     }
 
-
     //Caso a sorte seja negativa
     if (sorte <= -100){
     numItems = numItems - 4;
@@ -562,9 +502,10 @@ if (VMitico > 0){
     else if (sorte <= -25){
     numItems = numItems - 1;
     }
+  }
 
 //Caso o bau seja o da injustiça
-    if (Bau == 15){
+    else if (Bau == 15){
 
       if (sorte >= 100){
       numItems = numItems - 8;
@@ -594,6 +535,83 @@ if (VMitico > 0){
 
     }
 
+}
+
+int main() {
+    setlocale(LC_ALL, "portuguese");
+
+    unsigned seed = time(0);
+
+    srand(seed);
+
+    int sorte;
+    int area;
+
+    char EscolhaFiltro;
+    int TipoFiltro;
+
+    cout << "Insira a Sorte. (-100 a 100 para valores 'realistas')" << endl;
+    cin >> sorte;
+    cout << "Sorte: " << sorte << endl;
+    cout << "Insira a Área. (Ainda não faz diferença)" << endl;
+    cin >> area;
+    cout << "Filtrar tipos de itens? (s/n)" << endl;
+    cin >> EscolhaFiltro;
+
+    if ((EscolhaFiltro == 's') || (EscolhaFiltro == 'S')){
+    cout << "Qual item deve ser filtrado?" << endl;
+    cout << "1. Arma." << endl;
+    cout << "2. Armadura." << endl;
+    cout << "3. Poção." << endl;
+    cout << "4. Pergaminho." << endl;
+    cout << "5. Acessório." << endl;
+    cout << "6. Miscelânia." << endl;
+
+    cin >> TipoFiltro;
+    }
+
+    cout << "Escolha o Baú:" << endl;
+    cout << "1. Baú de Madeira Quebrado" << endl;
+    cout << "2. Baú de Madeira" << endl;
+    cout << "3. Baú de Ferro" << endl;
+    cout << "4. Baú de Ouro" << endl;
+    cout << "5. Baú de Madeira Grande" << endl;
+    cout << "6. Baú Balanceado" << endl;
+    cout << "7. Baú de Esmeralda" << endl;
+    cout << "8. Baú Estranho" << endl;
+    cout << "9. Baú Excepcional" << endl;
+    cout << "10. Baú Apex" << endl;
+    cout << "11. Baú de Safira" << endl;
+    cout << "12. Baú de Ametista" << endl;
+    cout << "13. Baú de Topázio" << endl;
+    cout << "14. Baú de Chefe" << endl;
+    cout << "15. Baú da Injustiça" << endl;
+    cout << "16. Baú Customizado" << endl;
+
+    int Bau;
+    cin >> Bau;
+
+    int MinCustom, MaxCustom;
+    int VComum = 0, VIncomum = 0, VRaro = 0, VEpico = 0, VLendario = 0, VMitico = 0;
+    int ValorRestante = 100;
+    char Escolha;
+
+    int numItems;
+
+if (Bau == 16){
+    DefBauCustom(MinCustom, MaxCustom, ValorRestante, Escolha, VComum, VIncomum, VRaro, VEpico, VLendario, VMitico);
+}
+
+
+
+    //Gera a quantidade de itens para o bau desejado
+    GeraQtdItens(Bau, numItems, sorte, MinCustom, MaxCustom);
+
+
+
+
+
+    ///Resultado final
 
     cout << "Loot do Baú (" << numItems << " itens):" << endl;
 
@@ -601,8 +619,8 @@ if (VMitico > 0){
         int randValue = rand() % 100 + 1 + sorte; // Adicona sorte no valor aleatorio
         int ogrand = randValue - sorte; // mostra o valor original
 
-        string rarity = determineRarity(randValue, Bau, VComum, VIncomum, VRaro, VEpico, VLendario, VMitico);
-        string itemType = determineItemType();
+        string rarity = determinaRaridade(randValue, Bau, VComum, VIncomum, VRaro, VEpico, VLendario, VMitico);
+        string itemType = determinaItemTipo(TipoFiltro);
 
         cout << "Item " << (i + 1) << ": Raridade - ";
         if (rarity == "Incomum"){ cout << T_VERDE_C << rarity << RESET_COR;}
