@@ -13,6 +13,6 @@ Um programa que gera itens de RPG aleatoriamente.
 - Caso o tipo seja uma arma, definir qual classe de arma pertence, tal como se possui encantamentos, modificações e outras características únicas.
 
 # Outros interesses de baixa importância:
-- implementar um sistema de pesquisa de itens na biblioteca de listas do programa.
-- Implementar uma opção de criar novos itens e adicioná-los da biblioteca.
+- Implementar um sistema de pesquisa de itens na biblioteca de listas do programa.
+- Implementar uma opção de criar novos itens e adicioná-los na biblioteca.
 
