@@ -1,0 +1,3 @@
+nome,ValorDeArea,descricao
+Feitiço de Fogo I,1,Aplica um feitiço de fogo no alvo selecionado com uma chance de 1/3 de causar queimadura, causando 1d10% da vida máxima por 3 turnos. Causa um dano de [ValorDeArea]d6.
+Feitiço de Gelo I,2,Aplica um feitiço de gelo no alvo selecionado com uma chance de 1/3 de congelar, congelando o alvo por 1 turno. Causa um dano de [ValorDeArea]d6.

@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1725089071 source:c:\users\elcson filho\desktop\estudo programação\projeto rpg\main.cpp
+	<iostream>
+	<cstdlib>
+	<ctime>
+	<vector>
+	<sstream>
+	<fstream>
+	<string>
+
